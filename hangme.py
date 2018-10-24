@@ -18,15 +18,19 @@ def chooseWord():
     return word
 
 
-def updateDisplayWord(guess: chr, realWord: str, currentDisplayWord: str) -> str:
+def updateDisplayWord(guess: chr, realword: str, currentdisplayword: str) -> str:
     """
     Fills in the blanks of a masked word given a guess
     :param guess: the character to fill in
-    :param realWord: string containing the full word
-    :param currentDisplayWord: string containing all revealed guesses
+    :param realword: string containing the full word
+    :param currentdisplayword: string containing all revealed guesses
     :return: updated display word
     """
-    return ""
+    pos = realword.find(guess)
+    lengthpos = 2 * pos
+    b = list(currentdisplayword)
+    b[lengthpos] = guess
+    return "".join(b)
 
 
 def main():
@@ -42,28 +46,31 @@ def main():
     displayword = ("_ " * len(realword)).strip()
 
     # Main game
-    while trys > 0:
+    while trys > 0 or displayword.replace(" ", "") == realword:
         print(displayword)
-        print("You have", trys, "tries left")
-        x = input("Pick a letter!")
-        if len(x) > 1:
+        print("You have {} tries left".format(trys))
+        guess = input("Pick a letter!")
+        if len(guess) != 1:
             print("Maybe just put 1 letter plz")
-        if x in used:
+        elif guess in used:
             print("Error! You've already used that letter silly!")
-        elif x in realword:
-            new = realword.count(x)
-            print("ok cool theres", new, " ", x)
-            used += x
-            pos = realword.find(x)
+        elif guess in realword:
+            # Says how many there are in the word
+            print("ok cool theres {} {}"
+                  .format(realword.count(guess), guess))
+
+            # Adds letter to used pile
+            used += guess
+
+            # Updates display word
+            pos = realword.find(guess)
             lengthpos = 2 * pos
             b = list(displayword)
-            b[lengthpos] = x
+            b[lengthpos] = guess
             displayword = "".join(b)
-
-
         else:
-            trys = trys - 1
-            print("oof sorry no ", x)
-            used += x
+            trys -= 1
+            used.append(guess)
+            print("oof sorry no ", guess)
         print("You've used: ", used)
     print("The word was:", realword)
