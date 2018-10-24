@@ -11,6 +11,6 @@ class TestChooseWord(TestCase):
     def test_checkWordIsFromFile(self):
         words = "words/custom.txt"
         file = open(words)
-        wordList = file.read().splitlines()
+        wordlist = file.read().splitlines()
         file.close()
-        self.assertTrue(chooseWord() in wordList)
+        self.assertTrue(chooseWord() in wordlist)

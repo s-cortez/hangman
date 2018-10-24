@@ -6,11 +6,15 @@ import random
 
 
 def chooseWord():
+    """
+    Returns a random word from words/custom.txt
+    :return: random word as a string
+    """
     trys = 10
     words = "words/custom.txt"
     file = open(words)
-    wordList = file.read().splitlines()
-    word = random.choice(wordList)
+    wordlist = file.read().splitlines()
+    word = random.choice(wordlist)
     file.close()
     return word
 
@@ -25,7 +29,7 @@ def checkWord():
         print(length)
         print("You have", trys, "tries left")
         x = input("Pick a letter!")
-        if len(x) >1:
+        if len(x) > 1:
             print("Maybe just put 1 letter plz")
         if x in used:
             print("Error! You've already used that letter silly!")
@@ -34,19 +38,16 @@ def checkWord():
             print("ok cool theres", new, " ", x)
             used += x
             pos = word.find(x)
-            lengthpos = 2*pos
+            lengthpos = 2 * pos
             b = list(length)
             b[lengthpos] = x
             length = "".join(b)
 
 
         else:
-            trys = trys-1
+            trys = trys - 1
             print("oof sorry no ", x)
             used += x
         print("You've used: ", used)
     print("The word was:", word)
     return trys
-
-
-
