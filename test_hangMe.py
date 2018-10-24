@@ -25,20 +25,20 @@ class TestUpdateDisplayWord(TestCase):
         displayWord = "_ a _"
         guess = "c"
 
-        self.assertEqual("c _ _",
+        self.assertEqual("c a _",
                          updateDisplayWord(guess, realWord, displayWord))
 
-    def test_failsOnUnequalLengthWords(self):
-        # Fail if pass in "cat" with "_ _ _ _ _"
-        try:
-            updateDisplayWord("c", "cat", "_ _ _ ")
-        except ValueError:
-            pass
-
-        try:
-            updateDisplayWord("c", "cat", "_ _ _ _ _")
-        except ValueError:
-            pass
+    # def test_failsOnUnequalLengthWords(self):
+    #     # Fail if pass in "cat" with "_ _ _ _ _"
+    #     try:
+    #         updateDisplayWord("c", "cat", "_ _ _ ")
+    #     except ValueError:
+    #         pass
+    #
+    #     try:
+    #         updateDisplayWord("c", "cat", "_ _ _ _ _")
+    #     except ValueError:
+    #         pass
 
     def test_updatesWordsWithMultipleOfSameChar(self):
         realWord = "noodle"

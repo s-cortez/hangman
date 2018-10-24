@@ -63,11 +63,7 @@ def main():
             used += guess
 
             # Updates display word
-            pos = realword.find(guess)
-            lengthpos = 2 * pos
-            b = list(displayword)
-            b[lengthpos] = guess
-            displayword = "".join(b)
+            displayword = updateDisplayWord(guess, realword, displayword)
         else:
             trys -= 1
             used.append(guess)
