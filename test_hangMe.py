@@ -21,8 +21,29 @@ class TestUpdateDisplayWord(TestCase):
                          updateDisplayWord(guess, realWord, displayWord))
 
     def test_updatesWithNonBlankDisplayWord(self):
-        self.fail()
+        realWord = "cat"
+        displayWord = "_ a _"
+        guess = "c"
+
+        self.assertEqual("c _ _",
+                         updateDisplayWord(guess, realWord, displayWord))
 
     def test_failsOnUnequalLengthWords(self):
         # Fail if pass in "cat" with "_ _ _ _ _"
-        self.fail()
+        try:
+            updateDisplayWord("c", "cat", "_ _ _ ")
+        except ValueError:
+            pass
+
+        try:
+            updateDisplayWord("c", "cat", "_ _ _ _ _")
+        except ValueError:
+            pass
+
+    def test_updatesWordsWithMultipleOfSameChar(self):
+        realWord = "noodle"
+        displayWord = "_ _ _ _ _ _"
+        guess = "o"
+
+        self.assertEqual("_ o o _ _ _",
+                         updateDisplayWord(guess, realWord, displayWord))
